@@ -75,11 +75,11 @@ namespace G3L.Examples.NTier.DAL.Repository
         {
             if (entity != null)
             {
-                _set.Remove(entity);
+                entity.Deleted = true;
             }
         }
 
-        public async void Delete(int id)
+        public async Task Delete(int id)
         {
             var entity = await FirstOrDefaultAsync(x => x.Id == id);
             Delete(entity);

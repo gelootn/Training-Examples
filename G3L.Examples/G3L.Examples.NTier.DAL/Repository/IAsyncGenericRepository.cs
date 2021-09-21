@@ -19,7 +19,7 @@ namespace G3L.Examples.NTier.DAL.Repository
         
         Task<TEntity> AddOrUpdateAsync(TEntity entity);
         void Delete(TEntity entity);
-        void Delete(int id);
+        Task Delete(int id);
 
         Task SaveChangesAsync();
     }
