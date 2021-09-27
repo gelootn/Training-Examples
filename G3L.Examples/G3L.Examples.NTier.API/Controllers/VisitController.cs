@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace G3L.Examples.NTier.API.Controllers
 {
-    [Route("api/visit")]
+    [Route("api/[controller]")]
     public class VisitController : ControllerBase
     {
         private readonly IVisitService _service;

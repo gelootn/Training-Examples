@@ -65,6 +65,13 @@ namespace G3L.Examples.NTier.BLL.Services
             await _companyRepo.AddOrUpdateAsync(model);
             await _companyRepo.SaveChangesAsync();
         }
+        
+        public async void Update(CompanyModel company)
+        {
+            var model = _mapper.Map<Company>(company);
+            await _companyRepo.AddOrUpdateAsync(model);
+            await _companyRepo.SaveChangesAsync();
+        }
 
         public void Delete(int id)
         {

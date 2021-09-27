@@ -5,10 +5,12 @@ namespace G3L.Examples.NTier.DAL.Database
 {
     public class NTierDbContext : DbContext
     {
-        public NTierDbContext()
+        public NTierDbContext(DbContextOptions options) : base(options)
         {
             
         }
+        
+        
         
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }

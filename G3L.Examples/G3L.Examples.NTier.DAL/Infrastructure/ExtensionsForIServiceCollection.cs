@@ -1,4 +1,5 @@
 ﻿using G3L.Examples.NTier.DAL.Database;
+using G3L.Examples.NTier.DAL.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +13,8 @@ namespace G3L.Examples.NTier.DAL.Infrastructure
             {
                 opt.UseSqlServer(connectionString);
             });
+
+            services.AddScoped(typeof(IAsyncGenericRepository<>), typeof(AsyncGenericRepository<>));
         }
     }
 }

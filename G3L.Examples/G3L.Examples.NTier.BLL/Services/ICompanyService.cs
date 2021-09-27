@@ -12,6 +12,7 @@ namespace G3L.Examples.NTier.BLL.Services
         Task UpdateEmployee(EmployeeModel employee);
         Task RemoveEmployee(EmployeeModel employee);
         void Add(CompanyModel company);
+        void Update(CompanyModel company);
         void Delete(int id);
     }
 }
