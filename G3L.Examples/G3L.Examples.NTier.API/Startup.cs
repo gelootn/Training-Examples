@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using G3L.Examples.NTier.BLL.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,7 @@ namespace G3L.Examples.NTier.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddBusinessLayer(Configuration.GetConnectionString("NTier-demo"));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "G3L.Examples.NTier.API", Version = "v1"});
