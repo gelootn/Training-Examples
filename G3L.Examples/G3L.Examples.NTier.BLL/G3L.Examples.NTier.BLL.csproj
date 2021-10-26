@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\G3L.Examples.NTier.DAL\G3L.Examples.NTier.DAL.csproj" />
+      <ProjectReference Include="..\G3L.Examples.NTier.Framework\G3L.Examples.NTier.Framework.csproj" />
     </ItemGroup>
 
 </Project>

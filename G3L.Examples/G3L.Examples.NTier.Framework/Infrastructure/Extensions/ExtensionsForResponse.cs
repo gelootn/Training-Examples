@@ -17,7 +17,6 @@ namespace G3L.Examples.NTier.Framework.Infrastructure.Extensions
                 );
             return response;
         }
-
         public static Response<T> AddError<T>(this Response<T> response, string message)
         {
             return response.AddMessage(message, MessageType.Error);

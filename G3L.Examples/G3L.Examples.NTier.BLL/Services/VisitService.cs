@@ -5,6 +5,7 @@ using AutoMapper;
 using G3L.Examples.NTier.BLL.Models.Visit;
 using G3L.Examples.NTier.DAL.Entities;
 using G3L.Examples.NTier.DAL.Repository;
+using G3L.Examples.NTier.Framework.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace G3L.Examples.NTier.BLL.Services
@@ -31,26 +32,26 @@ namespace G3L.Examples.NTier.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<VisitModel>> GetOpenVisits()
+        public async Task<Response<VisitModel>> GetOpenVisits()
         {
             var result = await _visitRepo.GetAsync(
                 x => x.Stop == null,
                 q => q.Include(x => x.Company)
                         .Include(x=> x.Employee)
                         .Include(x=> x.Visitor));
-
-            return result.Select(x=> _mapper.Map<VisitModel>(x));
+            var mapped = result.Select(x => _mapper.Map<VisitModel>(x)).ToList();
+            return new Response<VisitModel>(mapped);
         }
 
-        public async Task<IEnumerable<VisitModel>> GetVisits()
+        public async Task<Response<VisitModel>> GetVisits()
         {
             var result = await _visitRepo.GetAsync(
                 x => x.Stop != null,
                 q => q.Include(x => x.Company)
                     .Include(x=> x.Employee)
                     .Include(x=> x.Visitor));
-            
-            return result.Select(x=> _mapper.Map<VisitModel>(x));
+            var mapped = result.Select(x=> _mapper.Map<VisitModel>(x)).ToList();
+            return new Response<VisitModel>(mapped);
         }
 
         public async Task RegisterVisit(StartVisitModel start)

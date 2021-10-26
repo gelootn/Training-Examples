@@ -6,6 +6,7 @@ using G3L.Examples.NTier.BLL.Models.Company;
 using G3L.Examples.NTier.BLL.Models.Employee;
 using G3L.Examples.NTier.DAL.Entities;
 using G3L.Examples.NTier.DAL.Repository;
+using G3L.Examples.NTier.Framework.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace G3L.Examples.NTier.BLL.Services
@@ -23,11 +24,14 @@ namespace G3L.Examples.NTier.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<CompanyModel>> Get()
+        public async Task<Response<CompanyModel>> Get()
         {
             var result = await _companyRepo.GetAsync(null, q => 
                 q.Include(x=> x.Employees.Where(x=> !x.Deleted)));
-            return result.Select(x => _mapper.Map<CompanyModel>(x));
+            
+            var mapped = result.Select(x => _mapper.Map<CompanyModel>(x)).ToList();
+
+            return new Response<CompanyModel>(mapped);
         }
 
         public async Task AddEmployeeToCompany(EmployeeModel employee, int companyId)
