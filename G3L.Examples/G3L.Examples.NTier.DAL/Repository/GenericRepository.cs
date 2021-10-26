@@ -19,7 +19,6 @@ namespace G3L.Examples.NTier.DAL.Repository
             _set = _context.Set<TEntity>();
         }
         
-        
         public IQueryable<TEntity> Get()
         {
             return Get(null, null);
@@ -33,10 +32,10 @@ namespace G3L.Examples.NTier.DAL.Repository
         public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> predicates, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include)
         {
             var query = _set.Where(x => !x.Deleted);
-            
+
             if (predicates != null)
                 query = query.Where(predicates);
-            
+
             if (include != null)
                 query = include(query);
 

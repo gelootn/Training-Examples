@@ -9,9 +9,12 @@ namespace G3L.Examples.NTier.DAL.Database
         {
             
         }
-        
-        
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Company> Companies { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Visitor> Visitors { get; set; }

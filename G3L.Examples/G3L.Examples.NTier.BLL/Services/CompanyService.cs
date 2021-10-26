@@ -25,7 +25,8 @@ namespace G3L.Examples.NTier.BLL.Services
 
         public async Task<IEnumerable<CompanyModel>> Get()
         {
-            var result = await _companyRepo.GetAsync(null, q => q.Include(x=> x.Employees.Where(x=> !x.Deleted)));
+            var result = await _companyRepo.GetAsync(null, q => 
+                q.Include(x=> x.Employees.Where(x=> !x.Deleted)));
             return result.Select(x => _mapper.Map<CompanyModel>(x));
         }
 
