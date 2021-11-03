@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using G3L.Examples.DDD.Domain.Common;
 using G3L.Examples.DDD.Domain.Common.Interfaces;
 using G3L.Examples.DDD.Domain.Common.Models;
-using G3L.Examples.DDD.Domain.Companies.Events;
-using G3L.Examples.DDD.Domain.Employees.Models;
+using G3L.Examples.DDD.Domain.Companies.Events.Company;
+using G3L.Examples.DDD.Domain.Companies.Exceptions;
+
+using static G3L.Examples.DDD.Domain.Common.ModelConstants;
 
 namespace G3L.Examples.DDD.Domain.Companies.Models
 {
@@ -13,6 +16,7 @@ namespace G3L.Examples.DDD.Domain.Companies.Models
         
         internal Company(string name)
         {
+            Validate(name);
             Name = name;
             _employees = new HashSet<Employee>();
         }
@@ -21,6 +25,7 @@ namespace G3L.Examples.DDD.Domain.Companies.Models
 
         public Company UpdateName(string name)
         {
+            Validate(name);
             Name = name;
             return this;
         }
@@ -29,6 +34,11 @@ namespace G3L.Examples.DDD.Domain.Companies.Models
         {
             _employees.Add(employee);
             RaiseEvent(new EmployeeAddedEvent());
+        }
+
+        private void Validate(string name)
+        {
+            Guard.ForStringLength<InvalidCompanyException>(name, MinNameLength, MaxNameLength, nameof(Name));
         }
     }
 }

@@ -1,14 +1,12 @@
-﻿using G3L.Examples.DDD.Domain.Companies.Models;
-
-namespace G3L.Examples.DDD.Domain.Companies.Factories
+﻿namespace G3L.Examples.DDD.Domain.Companies.Factories.Company
 {
     public class CompanyFactory : ICompanyFactory
     {
         private string _companyName = default;
 
-        public Company Build()
+        public Models.Company Build()
         {
-            return new Company(_companyName);
+            return new Models.Company(_companyName);
         }
 
         public ICompanyFactory WithName(string name)
