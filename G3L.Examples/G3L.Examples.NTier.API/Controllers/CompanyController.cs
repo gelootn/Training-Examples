@@ -59,10 +59,10 @@ namespace G3L.Examples.NTier.API.Controllers
             return Ok();
         }
         
-        [HttpDelete("{id}/employee")]
-        public async Task<IActionResult> RemoveEmployee([FromRoute] int id,EmployeeModel employee)
+        [HttpDelete("{id}/employee/{employeeId}")]
+        public async Task<IActionResult> RemoveEmployee([FromRoute] int id, [FromRoute] int employeeId)
         {
-            await _service.RemoveEmployee(employee);
+            await _service.RemoveEmployee(employeeId);
             return Ok();
         }
     }
