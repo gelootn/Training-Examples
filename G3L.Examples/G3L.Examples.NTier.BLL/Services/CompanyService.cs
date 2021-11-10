@@ -58,9 +58,9 @@ namespace G3L.Examples.NTier.BLL.Services
             }
         }
 
-        public async Task RemoveEmployee(EmployeeModel employee)
+        public async Task RemoveEmployee(int id)
         {
-            await _employeeRepo.Delete(employee.CompanyId);
+            await _employeeRepo.Delete(id);
             await _employeeRepo.SaveChangesAsync();
         }
 
