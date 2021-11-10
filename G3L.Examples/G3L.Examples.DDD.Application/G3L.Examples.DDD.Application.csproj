@@ -16,9 +16,4 @@
       <ProjectReference Include="..\G3L.Examples.DDD.Domain\G3L.Examples.DDD.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Visiting\Visit\Queries\Open" />
-      <Folder Include="Visiting\Visit\Queries\Search" />
-    </ItemGroup>
-
 </Project>
