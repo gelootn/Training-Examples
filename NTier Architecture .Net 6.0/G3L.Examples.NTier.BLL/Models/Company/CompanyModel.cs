@@ -1,7 +1,6 @@
-﻿namespace G3L.Examples.NTier.BLL.Models.Company
+﻿namespace G3L.Examples.NTier.BLL.Models.Company;
+
+public class CompanyModel : ModelBase
 {
-    public class CompanyModel : ModelBase
-    {
-        public string Name { get; set; }
-    }
+    public string Name { get; set; }
 }
