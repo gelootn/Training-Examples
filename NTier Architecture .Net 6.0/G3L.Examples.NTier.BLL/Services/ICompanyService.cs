@@ -8,7 +8,7 @@ public interface ICompanyService
     Task AddEmployeeToCompany(EmployeeModel employee, int companyId);
     Task UpdateEmployee(EmployeeModel employee);
     Task RemoveEmployee(int id);
-    void Add(CompanyModel company);
-    void Update(CompanyModel company);
-    void Delete(int id);
+    Task Add(CompanyModel company);
+    Task Update(CompanyModel company);
+    Task Delete(int id);
 }

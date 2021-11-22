@@ -1,8 +1,8 @@
 ﻿namespace G3L.Examples.NTier.BLL.Models.Employee;
 
-public class EmployeeModel : ModelBase
+public record EmployeeModel : ModelBase
 {
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public int CompanyId { get; set; }
+    public string Name { get; init; }
+    public string Email { get; init; }
+    public int CompanyId { get; init; }
 }

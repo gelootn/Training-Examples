@@ -1,7 +1,7 @@
 ﻿namespace G3L.Examples.NTier.BLL.Models
 {
-    public abstract class ModelBase
+    public abstract record ModelBase
     {
-        public int Id { get; set; }
+        public int Id { get; init; }
     }
 }

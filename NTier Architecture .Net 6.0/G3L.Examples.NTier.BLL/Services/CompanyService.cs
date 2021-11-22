@@ -58,23 +58,23 @@ public class CompanyService : ICompanyService
         await _employeeRepo.SaveChangesAsync();
     }
 
-    public async void Add(CompanyModel company)
+    public async Task Add(CompanyModel company)
     {
         var model = _mapper.Map<Company>(company);
         await _companyRepo.AddOrUpdateAsync(model);
         await _companyRepo.SaveChangesAsync();
     }
 
-    public async void Update(CompanyModel company)
+    public async Task Update(CompanyModel company)
     {
         var model = _mapper.Map<Company>(company);
         await _companyRepo.AddOrUpdateAsync(model);
         await _companyRepo.SaveChangesAsync();
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        _companyRepo.Delete(id);
-        _companyRepo.SaveChangesAsync();
+        await _companyRepo.Delete(id);
+        await _companyRepo.SaveChangesAsync();
     }
 }

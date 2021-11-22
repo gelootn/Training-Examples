@@ -2,7 +2,7 @@
 
 namespace G3L.Examples.NTier.BLL.Models.Visit;
 
-public class StartVisitModel
+public record StartVisitModel
 {
     public string VisitorName { get; set; }
     public string VisitorEmail { get; set; }

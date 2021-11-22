@@ -11,7 +11,7 @@ public static class ExtensionsForIServiceCollection
         services.AddDbContext<NTierDbContext>(opt =>
         {
             opt.UseSqlServer(connectionString);
-        });
+        }, ServiceLifetime.Scoped);
 
         services.AddScoped(typeof(IAsyncGenericRepository<>), typeof(AsyncGenericRepository<>));
     }

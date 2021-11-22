@@ -4,14 +4,16 @@ using G3L.Examples.NTier.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace G3L.Examples.NTier.DAL.Migrations
 {
     [DbContext(typeof(NTierDbContext))]
-    partial class NTierDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211118125054_ExtraField")]
+    partial class ExtraField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

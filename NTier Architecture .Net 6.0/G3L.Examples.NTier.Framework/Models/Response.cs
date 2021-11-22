@@ -21,5 +21,5 @@ public class Response<T>
     public T Value => _values.FirstOrDefault();
     public ICollection<T> Values => _values;
     public bool IsSuccess => Messages.All(x => x.Type != MessageType.Error);
-    public ICollection<Message> Messages { get; set; }
+    public ICollection<Message> Messages { get; set; } = new List<Message>();
 }
