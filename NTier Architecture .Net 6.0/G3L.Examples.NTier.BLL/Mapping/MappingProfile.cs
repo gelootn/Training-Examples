@@ -1,8 +1,4 @@
 ﻿using AutoMapper;
-using G3L.Examples.NTier.BLL.Models.Company;
-using G3L.Examples.NTier.BLL.Models.Employee;
-using G3L.Examples.NTier.BLL.Models.Visit;
-using G3L.Examples.NTier.DAL.Entities;
 
 namespace G3L.Examples.NTier.BLL.Mapping
 {

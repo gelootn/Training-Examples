@@ -7,7 +7,7 @@ namespace G3L.Examples.NTier.DAL.Database
     {
         public NTierDbContext(DbContextOptions options) : base(options)
         {
-            
+            this.Database.SetConnectionString("");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
