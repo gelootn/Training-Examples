@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MicroServices.CompanyService.BLL.Models
 {
-    internal record Company
+    public record Company
     {
         public int Id { get; set; }
         public string Name { get; set; }

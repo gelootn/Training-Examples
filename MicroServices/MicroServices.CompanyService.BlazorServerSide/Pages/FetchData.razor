@@ -1,0 +1,64 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Company Management</PageTitle>
+
+
+@using MediatR
+@using MicroServices.CompanyService.BLL.Models
+@using MicroServices.CompanyService.BLL.Queries.GetCompanies
+@inject IMediator _mediator
+
+<h1>Company Management</h1>
+
+
+
+@if (_companies == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>VAT</th>
+                <th>Phone</th>
+                <th>Building</th>
+                <th>Floor</th>
+                <th># Employees</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in _companies)
+            {
+                <tr>
+                    <td>@company.Name</td>
+                    <td>@company.VatNumber</td>
+                    <td>@company.PhoneNumber</td>
+                    <td>@company.Building</td>
+                    <td>@company.Floor</td>
+                    <td><a href="" @onclick="ToggleEmployeeForRecord(company.Id)">@company.Employees.Count</a></td>
+                </tr>
+                <tr class="visually-hidden">
+                    <td colspan="6"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Company>? _companies;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _companies = await _mediator.Send(new GetCompaniesQuery());
+    }
+
+    private EventCallback ToggleEmployeeForRecord(int id)
+    {
+        
+        return EventCallback.Empty;
+    } 
+}
