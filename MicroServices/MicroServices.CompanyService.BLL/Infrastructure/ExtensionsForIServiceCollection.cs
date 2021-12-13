@@ -12,7 +12,7 @@ namespace MicroServices.CompanyService.BLL.Infrastructure
         {
             services.AddDal(configuration.GetConnectionString("demo"));
             services.AddMediatR(typeof(ValidationBehavior<,>).Assembly);
-            services.AddAutoMapper(cfg => cfg.AddProfile(typeof(MappingProfile)));
+            services.AddAutoMapper(typeof(MappingProfile).Assembly);
         }
     }
 }

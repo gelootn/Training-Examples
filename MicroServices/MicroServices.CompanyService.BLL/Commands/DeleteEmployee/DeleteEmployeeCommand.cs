@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MicroServices.Common.BLL.Commands;
 
 namespace MicroServices.CompanyService.BLL.Commands.DeleteEmployee
 {
-    public class DeleteEmployeeCommand : IRequest
+    public class DeleteEmployeeCommand : DeleteCommand
     {
-        public int Id { get; set; }
     }
 }

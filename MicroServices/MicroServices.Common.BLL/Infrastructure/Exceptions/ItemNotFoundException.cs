@@ -1,6 +1,6 @@
-﻿namespace MicroServices.CompanyService.BLL.Infrastructure.Exceptions
+﻿namespace MicroServices.Common.BLL.Infrastructure.Exceptions
 {
-    internal class ItemNotFoundException : Exception
+    public class ItemNotFoundException : Exception
     {
         public ItemNotFoundException(int id) : base($"The item with id: {id} was not found")
         {

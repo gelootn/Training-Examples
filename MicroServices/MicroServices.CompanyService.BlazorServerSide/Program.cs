@@ -1,3 +1,6 @@
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using MicroServices.CompanyService.BlazorServerSide.Data;
 using MicroServices.CompanyService.BLL.Infrastructure;
 using Microsoft.AspNetCore.Components;
@@ -9,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddBll(builder.Configuration);
+// Add Blazorise
+builder.Services.AddBlazorise().AddBootstrapProviders().AddFontAwesomeIcons();
+
 builder.Services.AddSingleton<WeatherForecastService>();
 
 var app = builder.Build();

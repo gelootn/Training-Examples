@@ -1,32 +1,32 @@
-﻿using Microservices.Common.DAL.Contracts;
-using MicroServices.CompanyService.BLL.Infrastructure.Exceptions;
+﻿using MicroServices.Common.BLL.Infrastructure.Exceptions;
 using MicroServices.CompanyService.DAL.Models;
 
 namespace MicroServices.CompanyService.BLL.Commands.AddEmployee
 {
-    internal class AddEmployeeCommandHandler : IRequestHandler<AddEmployeeCommand, AddEmployeeCommandResponse>
+    internal class AddEmployeeCommandHandler : AddCommandHandler<AddEmployeeCommand, Employee, AddEmployeeCommandResponse>
     {
         private readonly IGenericRepository<Company> _companyRepository;
 
-        public AddEmployeeCommandHandler(IGenericRepository<Company> companyRepository)
+        public AddEmployeeCommandHandler(IGenericRepository<Employee> repo, IGenericRepository<Company> companyRepository, IMapper mapper) : base(repo, mapper)
         {
             _companyRepository = companyRepository;
         }
-        public async Task<AddEmployeeCommandResponse> Handle(AddEmployeeCommand request, CancellationToken cancellationToken)
+
+        public override async Task<AddEmployeeCommandResponse> Handle(AddEmployeeCommand request, CancellationToken cancellationToken)
         {
             var company = await _companyRepository.FindAsync(c => c.Id == request.CompanyId);
             if (company == null)
                 throw new ItemNotFoundException(request.CompanyId);
-
+            
             var employee = new Employee { 
                 Name = request.FirstName,
                 LastName = request.LastName,
-                Email = request.Email
+                Email = request.Email,
+                Company = company
             };
-
-            company.Employees.Add(employee);
-            await _companyRepository.AddOrUpdate(company);
-
+            
+            await Repo.AddOrUpdate(employee);
+            
             return new AddEmployeeCommandResponse { Id = employee.Id };
         }
     }

@@ -14,9 +14,4 @@ namespace MicroServices.CompanyService.BLL.Commands.EditEmployee
         public string LastName { get; set; }
         public string Email { get; set; }
     }
-
-    internal class EditEmployeeCommandResponse
-    {
-        public int Id { get; set; }
-    }
 }

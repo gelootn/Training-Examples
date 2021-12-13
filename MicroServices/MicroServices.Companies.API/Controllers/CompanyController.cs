@@ -101,7 +101,7 @@ namespace MicroServices.CompanyService.API.Controllers
             await _mediator.Send(command);
             return Ok();
         }
-
+        // api/company/2/employee/25?q=ewoijf&w=oikj
         [HttpDelete("{id}/employee/{employeeId}")]
         public async Task<IActionResult> RemoveEmployee([FromRoute] int id, [FromRoute] int employeeId)
         {
