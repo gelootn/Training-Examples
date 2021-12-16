@@ -22,14 +22,14 @@ namespace MicroServices.CompanyService.BlazorServerSide.Translations {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CompanyTranslations {
+    public class EmployeeTranslations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CompanyTranslations() {
+        internal EmployeeTranslations() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MicroServices.CompanyService.BlazorServerSide.Translations {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MicroServices.CompanyService.BlazorServerSide.Translations.CompanyTranslations", typeof(CompanyTranslations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MicroServices.CompanyService.BlazorServerSide.Translations.EmployeeTranslations", typeof(EmployeeTranslations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,29 @@ namespace MicroServices.CompanyService.BlazorServerSide.Translations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Building.
+        ///   Looks up a localized string similar to E-mail.
         /// </summary>
-        public static string Building {
+        public static string Email {
             get {
-                return ResourceManager.GetString("Building", resourceCulture);
+                return ResourceManager.GetString("Email", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Firstname.
         /// </summary>
-        public static string CompanyName {
+        public static string FirstName {
             get {
-                return ResourceManager.GetString("CompanyName", resourceCulture);
+                return ResourceManager.GetString("FirstName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Companies.
+        ///   Looks up a localized string similar to Lastname.
         /// </summary>
-        public static string CompanyOverview {
+        public static string LastName {
             get {
-                return ResourceManager.GetString("CompanyOverview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Floor.
-        /// </summary>
-        public static string Floor {
-            get {
-                return ResourceManager.GetString("Floor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phone.
-        /// </summary>
-        public static string PhoneNumber {
-            get {
-                return ResourceManager.GetString("PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VAT Number.
-        /// </summary>
-        public static string VatNumber {
-            get {
-                return ResourceManager.GetString("VatNumber", resourceCulture);
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
     }

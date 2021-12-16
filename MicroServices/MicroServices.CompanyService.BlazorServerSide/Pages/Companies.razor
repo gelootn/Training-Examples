@@ -1,5 +1,6 @@
-﻿@page "/company"
-@using Blazorise
+﻿@page "/"
+@page "/company"
+
 <PageTitle>Company Management</PageTitle>
 
 @using MicroServices.CompanyService.BLL.Models
@@ -15,11 +16,11 @@
 @inject NavigationManager _navigation
 
 
-<h1>Company Management</h1>
+<h1>@CompanyTranslations.CompanyOverview</h1>
 
 @if (_companies == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>@GlobalTranslations.Loading_Data</em></p>
 }
 else
 {

@@ -117,22 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Building" xml:space="preserve">
-    <value>Building</value>
+  <data name="Loading_Data" xml:space="preserve">
+    <value>Loading data...</value>
   </data>
-  <data name="CompanyName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="CompanyOverview" xml:space="preserve">
-    <value>Manage Companies</value>
-  </data>
-  <data name="Floor" xml:space="preserve">
-    <value>Floor</value>
-  </data>
-  <data name="PhoneNumber" xml:space="preserve">
-    <value>Phone</value>
-  </data>
-  <data name="VatNumber" xml:space="preserve">
-    <value>VAT Number</value>
+  <data name="Loading_Page" xml:space="preserve">
+    <value>Loading Page....</value>
   </data>
 </root>

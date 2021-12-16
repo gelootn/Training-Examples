@@ -15,45 +15,53 @@
 
 <h3>Company @_company?.Name</h3>
 
+@if (_company == null)
+{
+    <p><em>@GlobalTranslations.Loading_Data</em></p>
+}
+else
+{
+    <DataGrid TItem="Employee"
+              Data="@_company?.Employees"
+              Editable
+              EditMode="DataGridEditMode.Popup"
+              Filterable
+              RowInserted="RowInsertedCallback"
+              RowUpdated="RowUpdatedCallback"
+              RowRemoved="RowRemovedCallback"
+              RowRemoving="RowRemovingCallback"
+              >
+        <DataGridColumns>
+            <DataGridColumn TItem="Employee" Field="@nameof(Employee.FirstName)" Caption="@EmployeeTranslations.FirstName" Editable></DataGridColumn>
+            <DataGridColumn TItem="Employee" Field="@nameof(Employee.LastName)" Caption="@EmployeeTranslations.LastName" Editable></DataGridColumn>
+            <DataGridColumn TItem="Employee" Field="@nameof(Employee.Email)" Caption="@EmployeeTranslations.Email" Editable ></DataGridColumn>
+            <DataGridCommandColumn TItem="Employee">
+                    
+                <NewCommandTemplate>
+                    <Button Color="Color.Success" Clicked="@context.Clicked">New</Button>
+                </NewCommandTemplate>
+                <EditCommandTemplate>
+                    <Button Color="Color.Primary" Clicked="@context.Clicked">Edit</Button>
+                </EditCommandTemplate>
+                <DeleteCommandTemplate>
+                    <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
+                </DeleteCommandTemplate>
+                <SaveCommandTemplate>
+                    <Button Color="Color.Success" Clicked="@context.Clicked">Save</Button>
+                </SaveCommandTemplate>
+                <CancelCommandTemplate>
+                    <Button Color="Color.Danger" Clicked="@context.Clicked">Cancel</Button>
+                </CancelCommandTemplate>
+                <ClearFilterCommandTemplate>
+                    <Button Color="Color.Secondary" Clicked="@context.Clicked">Clear</Button>
+                </ClearFilterCommandTemplate>
+            </DataGridCommandColumn>
+        </DataGridColumns>
 
-<DataGrid TItem="Employee"
-          Data="@_company?.Employees"
-          Editable
-          EditMode="DataGridEditMode.Popup"
-          Filterable
-          RowInserted="RowInsertedCallback"
-          RowUpdated="RowUpdatedCallback"
-          RowRemoved="RowRemovedCallback"
-          RowRemoving="RowRemovingCallback"
-          >
-    <DataGridColumns>
-        <DataGridColumn TItem="Employee" Field="@nameof(Employee.FirstName)" Caption="Firstname" Editable></DataGridColumn>
-        <DataGridColumn TItem="Employee" Field="@nameof(Employee.LastName)" Caption="Lastname" Editable></DataGridColumn>
-        <DataGridColumn TItem="Employee" Field="@nameof(Employee.Email)" Caption="Email" Editable ></DataGridColumn>
-        <DataGridCommandColumn TItem="Employee">
-                
-            <NewCommandTemplate>
-                <Button Color="Color.Success" Clicked="@context.Clicked">New</Button>
-            </NewCommandTemplate>
-            <EditCommandTemplate>
-                <Button Color="Color.Primary" Clicked="@context.Clicked">Edit</Button>
-            </EditCommandTemplate>
-            <DeleteCommandTemplate>
-                <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
-            </DeleteCommandTemplate>
-            <SaveCommandTemplate>
-                <Button Color="Color.Success" Clicked="@context.Clicked">Save</Button>
-            </SaveCommandTemplate>
-            <CancelCommandTemplate>
-                <Button Color="Color.Danger" Clicked="@context.Clicked">Cancel</Button>
-            </CancelCommandTemplate>
-            <ClearFilterCommandTemplate>
-                <Button Color="Color.Secondary" Clicked="@context.Clicked">Clear</Button>
-            </ClearFilterCommandTemplate>
-        </DataGridCommandColumn>
-    </DataGridColumns>
+    </DataGrid>
+}
 
-</DataGrid>
+
 <Button Color="Color.Info" Clicked="NavigateToCompanies">Back to companies</Button>
 
 <MessageAlert></MessageAlert>

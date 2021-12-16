@@ -29,12 +29,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CompanyTranslations.resx</DependentUpon>
     </Compile>
+    <Compile Update="Translations\EmployeeTranslations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EmployeeTranslations.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Translations\GlobalTranslations.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GlobalTranslations.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Translations\CompanyTranslations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CompanyTranslations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\EmployeeTranslations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmployeeTranslations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Translations\GlobalTranslations.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalTranslations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 
