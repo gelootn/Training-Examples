@@ -1,0 +1,125 @@
+﻿@page "/company/{CompanyId:int}"
+
+@using MicroServices.CompanyService.BLL.Models
+@using MicroServices.CompanyService.BLL.Queries.GetCompany
+@using Blazorise
+@using MicroServices.CompanyService.BLL.Commands.AddEmployee
+@using MicroServices.CompanyService.BLL.Commands.DeleteEmployee
+@using MicroServices.CompanyService.BLL.Commands.EditEmployee
+
+
+@inject IMediator _mediator
+@inject IMessageService _messageService
+@inject NavigationManager _navigation
+
+
+<h3>Company @_company?.Name</h3>
+
+
+<DataGrid TItem="Employee"
+          Data="@_company?.Employees"
+          Editable
+          EditMode="DataGridEditMode.Popup"
+          Filterable
+          RowInserted="RowInsertedCallback"
+          RowUpdated="RowUpdatedCallback"
+          RowRemoved="RowRemovedCallback"
+          RowRemoving="RowRemovingCallback"
+          >
+    <DataGridColumns>
+        <DataGridColumn TItem="Employee" Field="@nameof(Employee.FirstName)" Caption="Firstname" Editable></DataGridColumn>
+        <DataGridColumn TItem="Employee" Field="@nameof(Employee.LastName)" Caption="Lastname" Editable></DataGridColumn>
+        <DataGridColumn TItem="Employee" Field="@nameof(Employee.Email)" Caption="Email" Editable ></DataGridColumn>
+        <DataGridCommandColumn TItem="Employee">
+                
+            <NewCommandTemplate>
+                <Button Color="Color.Success" Clicked="@context.Clicked">New</Button>
+            </NewCommandTemplate>
+            <EditCommandTemplate>
+                <Button Color="Color.Primary" Clicked="@context.Clicked">Edit</Button>
+            </EditCommandTemplate>
+            <DeleteCommandTemplate>
+                <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
+            </DeleteCommandTemplate>
+            <SaveCommandTemplate>
+                <Button Color="Color.Success" Clicked="@context.Clicked">Save</Button>
+            </SaveCommandTemplate>
+            <CancelCommandTemplate>
+                <Button Color="Color.Danger" Clicked="@context.Clicked">Cancel</Button>
+            </CancelCommandTemplate>
+            <ClearFilterCommandTemplate>
+                <Button Color="Color.Secondary" Clicked="@context.Clicked">Clear</Button>
+            </ClearFilterCommandTemplate>
+        </DataGridCommandColumn>
+    </DataGridColumns>
+
+</DataGrid>
+<Button Color="Color.Info" Clicked="NavigateToCompanies">Back to companies</Button>
+
+<MessageAlert></MessageAlert>
+<Snackbar @ref="_feedback" Background="@Background.Success">
+    <SnackbarBody>
+        <i class="fa fa-info"></i>Item Saved
+    </SnackbarBody>
+</Snackbar>
+
+@code {
+    [Parameter]
+    public int CompanyId { get; set; }
+
+    private Company _company;
+    private Snackbar _feedback;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _company = await _mediator.Send(new GetCompanyQuery{ Id = CompanyId});
+    }
+
+    private void NavigateToCompanies()
+    {
+        _navigation.NavigateTo("/company");
+    }
+
+    private async Task RowInsertedCallback(SavedRowItem<Employee, Dictionary<string, object>> obj)
+    {
+        var command = new AddEmployeeCommand
+        {
+            CompanyId = _company.Id,
+            Email = obj.Item.Email,
+            LastName = obj.Item.LastName,
+            FirstName = obj.Item.FirstName
+        };
+
+        var result = await _mediator.Send(command);
+        obj.Item.Id = result.Id;
+        await _feedback.Show();
+    }
+
+    private async Task RowUpdatedCallback(SavedRowItem<Employee, Dictionary<string, object>> obj)
+    {
+        var command = new EditEmployeeCommand
+        {
+            EmployeeId = obj.Item.Id,
+            CompanyId = _company.Id,
+            Email = obj.Item.Email,
+            LastName = obj.Item.LastName,
+            FirstName = obj.Item.FirstName
+        };
+
+        var result = await _mediator.Send(command);
+        await _feedback.Show();
+    }
+
+    private void RowRemovedCallback(Employee obj)
+    {
+        var command = new DeleteEmployeeCommand {Id = obj.Id};
+        _mediator.Send(command);
+    }
+
+    private async Task RowRemovingCallback(CancellableRowChange<Employee> obj)
+    {
+        var result = await _messageService.Confirm($"Please confirm the deletion of employee '{obj.Item.FullName}'");
+        obj.Cancel = !result;
+    }
+
+}

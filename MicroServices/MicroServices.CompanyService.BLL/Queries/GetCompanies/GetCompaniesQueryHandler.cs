@@ -17,7 +17,7 @@ namespace MicroServices.CompanyService.BLL.Queries.GetCompanies
 
         public async Task<ICollection<Company>> Handle(GetCompaniesQuery request, CancellationToken cancellationToken)
         {
-            var result = await _repository.GetAll();
+            var result = await _repository.GetAllAsync();
             var mapped = _mapper.Map<ICollection<Company>>(result);
             return mapped;
         }

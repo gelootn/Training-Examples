@@ -1,5 +1,5 @@
 ﻿namespace MicroServices.CompanyService.BLL.Commands.AddEmployee;
 
-internal class AddEmployeeCommandResponse : BaseCommandResponse
+public class AddEmployeeCommandResponse : BaseCommandResponse
 {
 }

@@ -10,6 +10,8 @@ namespace MicroServices.CompanyService.DAL.Repositories.Contracts
 {
     public interface ICompanyRepository : IGenericRepository<Company>
     {
-        Task<ICollection<Company>> GetAll();
+        Task<ICollection<Company>> GetAllAsync();
+        Task<ICollection<Company>> GetAllWithEmployeesAsync();
+        Task<Company> GetAsync(int id);
     }
 }

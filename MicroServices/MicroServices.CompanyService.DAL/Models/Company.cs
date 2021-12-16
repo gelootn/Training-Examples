@@ -7,7 +7,7 @@ public class Company : Entity
     public string VatNumber { get; set; }
     public string Building { get; set; }
     public int Floor { get; set; }
-    public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public IEnumerable<Employee> Employees { get; set; }
 
 }
 

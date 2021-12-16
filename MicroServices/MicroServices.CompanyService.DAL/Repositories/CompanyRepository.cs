@@ -11,9 +11,19 @@ namespace MicroServices.CompanyService.DAL.Repositories
         {
         }
 
-        public async Task<ICollection<Company>> GetAll()
+        public async Task<ICollection<Company>> GetAllAsync()
         {
-            return await DbSet.Include(c=> c.Employees).ToListAsync();
+            return await DbSet.ToListAsync();
+        }
+
+        public async Task<ICollection<Company>> GetAllWithEmployeesAsync()
+        {
+            return await DbSet.Include(c => c.Employees).ToListAsync();
+        }
+
+        public async Task<Company> GetAsync(int id)
+        {
+            return await DbSet.Include(c => c.Employees).FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace MicroServices.CompanyService.DAL.Repositories
             DbSet = context.Set<TEntity>();
             _context = context;
         }
+
         public async Task AddOrUpdate(TEntity entity)
         {
             if (entity.Id == 0)
