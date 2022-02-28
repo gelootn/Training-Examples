@@ -5,6 +5,11 @@ namespace Dapper_Demo.Models
 {
     public class Invoice
     {
+        public Invoice()
+        {
+            InvoiceLines = new List<InvoiceLine>();
+        }
+
         public int InvoiceNumber { get; set; }
         public Customer Customer { get; set; }
         public DateTime Date { get; set; }
