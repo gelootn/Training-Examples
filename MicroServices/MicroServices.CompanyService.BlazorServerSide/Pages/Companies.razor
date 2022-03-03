@@ -1,0 +1,170 @@
+﻿@page "/"
+@page "/company"
+
+<PageTitle>Company Management</PageTitle>
+
+@using MicroServices.CompanyService.BLL.Models
+@using MicroServices.CompanyService.BLL.Queries.GetCompanies
+
+@using MicroServices.CompanyService.BLL.Commands.AddCompany
+@using MicroServices.CompanyService.BLL.Commands.DeleteCompany
+@using MicroServices.CompanyService.BLL.Commands.EditCompany
+
+
+@inject IMediator _mediator
+@inject IMessageService _messageService
+@inject NavigationManager _navigation
+
+
+<h1>@CompanyTranslations.CompanyOverview</h1>
+
+@if (_companies == null)
+{
+    <p><em>@GlobalTranslations.Loading_Data</em></p>
+}
+else
+{
+
+    <DataGrid
+        TItem="Company"
+        Data="@_companies"
+        @bind-SelectedRow="@_selectedCompany"
+        Responsive Filterable="true"
+        ShowPager="true"
+        Editable
+        Resizable
+        ResizeMode="TableResizeMode.Columns"
+        EditMode="DataGridEditMode.Popup"
+        FilteredDataChanged="FilteredDataChanged"
+        RowUpdated="RowUpdateCallBack"
+        RowInserted="RowInsertedCallBack"
+        RowRemoved="RowRemovedCallBack"
+        RowRemoving="RowRemovingCallBack"
+        
+    >  
+        <PopupTitleTemplate>
+            Companies.....
+        </PopupTitleTemplate>
+        <DataGridColumns>
+            <DataGridColumn TItem="Company" Field="@nameof(Company.Name)" Caption="@CompanyTranslations.CompanyName" Editable="true"/>
+            <DataGridColumn TItem="Company" Field="@nameof(Company.VatNumber)" Caption="@CompanyTranslations.VatNumber" Editable="true"></DataGridColumn>
+            <DataGridColumn TItem="Company" Field="@nameof(Company.PhoneNumber)" Caption="@CompanyTranslations.PhoneNumber" Editable="true"></DataGridColumn>
+            <DataGridColumn TItem="Company" Field="@nameof(Company.Building)" Caption="@CompanyTranslations.Building" Editable="true"></DataGridColumn>
+            <DataGridColumn TItem="Company" Field="@nameof(Company.Floor)" Caption="@CompanyTranslations.Floor" Editable="true"></DataGridColumn>
+            <DataGridColumn TItem="Company" Filterable="false" Sortable="false" Editable="false" >
+                <DisplayTemplate>
+                    <Button Color="Color.Info" class="float-end" @onclick="() => NavigateToDetails(context.Id)" >Details</Button>
+                </DisplayTemplate>
+            </DataGridColumn>
+            <DataGridCommandColumn TItem="Company">
+                
+                <NewCommandTemplate>
+                    <Button Color="Color.Success" Clicked="@context.Clicked">New</Button>
+                </NewCommandTemplate>
+                <EditCommandTemplate>
+                    <Button Color="Color.Primary" Clicked="@context.Clicked">Edit</Button>
+                </EditCommandTemplate>
+                <DeleteCommandTemplate>
+                    <Button Color="Color.Danger" Clicked="@context.Clicked">Delete</Button>
+                </DeleteCommandTemplate>
+                <SaveCommandTemplate>
+                    <Button Color="Color.Success" Clicked="@context.Clicked">Save</Button>
+                </SaveCommandTemplate>
+                <CancelCommandTemplate>
+                    <Button Color="Color.Danger" Clicked="@context.Clicked">Cancel</Button>
+                </CancelCommandTemplate>
+                <ClearFilterCommandTemplate>
+                    <Button Color="Color.Secondary" Clicked="@context.Clicked">Clear</Button>
+                </ClearFilterCommandTemplate>
+            </DataGridCommandColumn>
+        </DataGridColumns>
+
+        @*<ButtonRowTemplate>
+            <Button Color="Color.Success" Clicked="@context.NewCommand.Clicked">New</Button>
+            <Button Color="Color.Primary" Clicked="@context.EditCommand.Clicked" Disabled="@(_selectedCompany == null)">Edit</Button>
+        </ButtonRowTemplate>*@
+    </DataGrid>
+
+
+
+}
+
+<Snackbar @ref="_feedback" Background="@Background.Success">
+    <SnackbarBody>
+        <i class="fa fa-info"></i>Item Saved
+    </SnackbarBody>
+</Snackbar>
+
+@code {
+    private IEnumerable<Company>? _companies;
+    private Company? _selectedCompany;
+    private Snackbar _feedback;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _companies = await _mediator.Send(new GetCompaniesQuery());
+    }
+
+
+    private void FilteredDataChanged(DataGridFilteredDataEventArgs<Company> obj)
+    {
+    }
+
+    private void NavigateToDetails(int id)
+    {
+        _navigation.NavigateTo($"/company/{id}");
+    }
+
+    private async Task RowUpdateCallBack(SavedRowItem<Company, Dictionary<string, object>> obj)
+    {
+        var company = obj.Item;
+        var command = new EditCompanyCommand
+        {
+            Building = company.Building,
+            Floor = company.Floor,
+            Id = company.Id,
+            Name = company.Name,
+            PhoneNumber = company.PhoneNumber,
+            VatNumber = company.VatNumber
+        };
+        await _mediator.Send(command);
+        await _feedback.Show();
+
+    }
+
+    private async Task RowInsertedCallBack(SavedRowItem<Company, Dictionary<string, object>> obj)
+    {
+        var company = obj.Item;
+        var command = new AddCompanyCommand
+        {
+            Building = company.Building,
+            Floor = company.Floor,
+            Name = company.Name,
+            PhoneNumber = company.PhoneNumber,
+            VatNumber = company.VatNumber
+        };
+        var result =  await _mediator.Send(command);
+        company.Id = result.Id;
+        await _feedback.Show();
+    }
+
+
+
+    private async Task RowRemovedCallBack(Company obj)
+    {
+        var command = new DeleteCompanyCommand
+        {
+            Id = obj.Id
+        };
+        await _mediator.Send(command);
+    }
+
+    private async Task RowRemovingCallBack(CancellableRowChange<Company> obj)
+    {
+        var response = await _messageService.Confirm($"Please confirm the deletion of company '{obj.Item.Name}'");
+        obj.Cancel = !response;
+    }
+
+    
+}

@@ -1,0 +1,9 @@
+﻿@page "/"
+@namespace MicroServices.CompanyService.BlazorServerSide.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+<link href="_content/Blazorise.Snackbar/blazorise.snackbar.css" rel="stylesheet" />
+<component type="typeof(App)" render-mode="ServerPrerendered" />
